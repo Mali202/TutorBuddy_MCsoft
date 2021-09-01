@@ -1,0 +1,15 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to TutorBuddy</h1>
+    <p>Get started by checking out all tutors approved on the platform</p>
+    <div class="btn-group-lg">
+        <button class="btn-primary">Tutors</button>
+        <a asp-area="" asp-page="./Modules/Index"><button class="btn-primary" >Available Modules</button></a>
+        <button class="btn-primary">Profile</button>
+    </div>
+</div>

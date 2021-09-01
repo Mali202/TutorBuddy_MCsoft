@@ -1,0 +1,39 @@
+﻿@page
+@model TutorBuddy.Pages.Tutors.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Approve Tutor</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Tutor.UserName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Tutor.UserName)
+        </dd>
+        <dt class="col-sm-2">
+            Email Address
+        </dt>
+        <dd class="col-sm-10">
+            JohnDoe@gmail.com
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Tutor.Fee)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Tutor.Fee)
+        </dd>
+        <dt class="col-sm-2">
+            <a asp-area="">Dowload Transcripts</a>
+        </dt>
+    </dl>
+</div>
+<div class="btn-group-toggle">
+    <button class="btn-success">Approve</button>
+    <button class="btn-danger">Reject</button>
+</div>

@@ -1,0 +1,52 @@
+﻿@page
+@model TutorBuddy.Pages.Tutors.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Register as Tutor</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Tutor.UserName" class="control-label"></label>
+                <input asp-for="Tutor.UserName" class="form-control" />
+                <span asp-validation-for="Tutor.UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Email Address</label>
+                <input asp-for="Tutor.UserName" class="form-control" />
+                <span asp-validation-for="Tutor.UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tutor.Fee" class="control-label"></label>
+                <input asp-for="Tutor.Fee" class="form-control" />
+                <span asp-validation-for="Tutor.Fee" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Password</label>
+                <input type="password" class="form-control" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Confirm Password</label>
+                <input type="password" class="form-control" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Register" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    All tutor registrations are subject to approval
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

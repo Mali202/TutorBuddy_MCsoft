@@ -1,0 +1,57 @@
+﻿@page
+@model TutorBuddy.Pages.Tutors.IndexModel
+
+@{
+    ViewData["Title"] = "Tutors";
+}
+
+<h1>Approved Tutors</h1>
+<form>
+    <p>
+        <select>
+            <option value="">Modules</option>
+        </select>
+        Username: <input type="text" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Tutor[0].UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tutor[0].Fee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tutor[0].AvgRating)
+            </th>
+            <th>
+                Modules
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Tutor) {
+    if (item.Approved)
+    {
+		<tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName) |
+                <a asp-page="./Details" asp-route-id="@item.StudentNumber">Details</a>
+            </td>
+            <td>
+                R @Html.DisplayFor(modelItem => item.Fee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AvgRating)
+            </td>
+            <td>
+              
+            </td>
+        </tr> 
+	}
+}
+    </tbody>
+</table>

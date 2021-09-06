@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using TutorBuddy_MCsoft;
 using TutorBuddy_MCsoft.Data;
 using TutorBuddy_MCsoft.Models;
 
@@ -14,6 +15,7 @@ namespace TutorBuddy.Pages.Modules
     public class EditModel : PageModel
     {
         private readonly TutorBuddy_MCsoftContext _context;
+        //private readonly Use_cases use_;
 
         public EditModel(TutorBuddy_MCsoftContext context)
         {

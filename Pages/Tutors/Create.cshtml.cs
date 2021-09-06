@@ -40,7 +40,7 @@ namespace TutorBuddy.Pages.Tutors
 
             //_context.Tutors.Add(Tutor);
             //await _context.SaveChangesAsync();
-            use_Cases.Addtutor(Tutor);
+            //use_Cases.Addtutor(Tutor);
 
             return RedirectToPage("./Index");
         }

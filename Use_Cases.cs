@@ -14,7 +14,10 @@ namespace TutorBuddy_MCsoft
         {
             _context = context;
         }
+
         //approved and rating are not set by ui
        
+     
+        
     }
 }

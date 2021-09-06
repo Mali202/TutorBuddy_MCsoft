@@ -16,6 +16,22 @@ namespace TutorBuddy_MCsoft
         }
 
         //approved and rating are not set by ui
-       
+        public void AddStudent(Student student)
+        {
+            _context.Student.Add(student);
+            _context.SaveChanges();
+        }
+
+        public void UpdateStudent(Student student)
+        {
+            _context.Student.Attach(student);
+            _context.SaveChanges();
+        }
+
+        public List<Tutor> BrowseTutors()
+        {
+            return _context.Tutors.ToList();
+        }
     }
+
 }

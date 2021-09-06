@@ -30,7 +30,7 @@ namespace TutorBuddy_MCsoft
 
         public List<Tutor> browseTutors()
         {
-            return _context.Tutors.ToList<>;
+            return _context.Tutors.ToList();
         }
     }
 }

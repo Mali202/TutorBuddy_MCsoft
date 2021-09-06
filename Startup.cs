@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TutorBuddy_MCsoft.Areas.Identity.Data;
 using TutorBuddy_MCsoft.Data;
 
 namespace TutorBuddy_MCsoft
@@ -31,6 +32,7 @@ namespace TutorBuddy_MCsoft
             //        options.UseSqlServer(Configuration.GetConnectionString("TutorBuddy_MCsoftContext")));
             services.AddDbContext<TutorBuddy_MCsoftContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(8, 0, 25))));
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,7 +53,7 @@ namespace TutorBuddy_MCsoft
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

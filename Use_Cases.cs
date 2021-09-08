@@ -34,11 +34,6 @@ namespace TutorBuddy_MCsoft
             return _context.Tutors.ToList();
         }
 
-        public void tester()
-        {
-            String hello = "Hello";
-        }
-
         public void bookSession(Session session)
         {
             _context.Sessions.Add(session);

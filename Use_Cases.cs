@@ -39,6 +39,11 @@ namespace TutorBuddy_MCsoft
             _context.Sessions.Add(session);
             _context.SaveChanges();
         }
+
+        public Boolean makePayment()
+        {
+            return true;
+        }
     }
 
 }

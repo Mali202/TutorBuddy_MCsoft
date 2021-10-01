@@ -9,5 +9,7 @@ namespace TutorBuddy_MCsoft.Areas.Identity.Data
     // Add profile data for application users by adding properties to the TutorBuddy_MCsoftUser class
     public class TutorBuddy_MCsoftUser : IdentityUser
     {
+        [PersonalData]
+        public int StudentNumber { get; set; }
     }
 }

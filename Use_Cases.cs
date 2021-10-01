@@ -44,6 +44,14 @@ namespace TutorBuddy_MCsoft
         {
             return true;
         }
+
+        public void addTutor(Tutor tutor)
+        {
+            _context.Tutors.Add(tutor);
+            _context.SaveChanges();
+        }
+
+
     }
 
 }

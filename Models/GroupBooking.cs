@@ -12,7 +12,6 @@ namespace TutorBuddy_MCsoft.Models
         public int BookingID { get; set; }
         public bool Paid { get; set; }
         public Session Session { get; set; }
-        string test;
 
         public IList<StudentGroupBooking> Students { get; set; }
     }

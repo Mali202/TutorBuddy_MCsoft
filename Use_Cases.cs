@@ -40,9 +40,16 @@ namespace TutorBuddy_MCsoft
             _context.SaveChanges();
         }
 
-        public Boolean makePayment()
+        public void makePaymentIndividual(IndividualBooking individualBooking)
         {
-            return true;
+            individualBooking.Paid = true;
+            _context.SaveChanges();
+        }
+
+        public void makePaymentGroup(GroupBooking groupBooking)
+        {
+            groupBooking.Paid = true;
+            _context.SaveChanges();
         }
 
         public void addTutor(Tutor tutor)

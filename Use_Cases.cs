@@ -52,6 +52,16 @@ namespace TutorBuddy_MCsoft
             _context.SaveChanges();
         }
 
+        public void downloadNotes()
+        {
+
+        }
+
+        public void rateTutor()
+        {
+
+        }
+
         public void addTutor(Tutor tutor)
         {
             _context.Tutors.Add(tutor);

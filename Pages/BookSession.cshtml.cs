@@ -51,7 +51,7 @@ namespace TutorBuddy.Pages.Sessions
             }
 
             IndividualBooking booking = new() { Paid = false, Session = Session, Student = student };
-            use_.addBooking(booking);
+            use_.bookSessionIndividual(booking);
             return RedirectToPage("./Index");
         }
     }

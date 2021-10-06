@@ -8,13 +8,13 @@ using Microsoft.EntityFrameworkCore;
 using TutorBuddy_MCsoft.Data;
 using TutorBuddy_MCsoft.Models;
 
-namespace TutorBuddy.Pages.Resources
+namespace TutorBuddy_MCsoft.Pages
 {
-    public class IndexModel : PageModel
+    public class ResourcesListModel : PageModel
     {
-        private readonly TutorBuddy_MCsoftContext _context;
+        private readonly TutorBuddy_MCsoft.Data.TutorBuddy_MCsoftContext _context;
 
-        public IndexModel(TutorBuddy_MCsoftContext context)
+        public ResourcesListModel(TutorBuddy_MCsoft.Data.TutorBuddy_MCsoftContext context)
         {
             _context = context;
         }

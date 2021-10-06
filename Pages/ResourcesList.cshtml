@@ -7,9 +7,6 @@
 
 <h1>ResourcesList</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -18,9 +15,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Resource[0].Type)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Resource[0].Link)
             </th>
             <th></th>
         </tr>
@@ -38,7 +32,7 @@
                 @Html.DisplayFor(modelItem => item.Link)
             </td>*@
             <td>
-                <a asp-page="./Download" asp-route-id="@item.ID">Edit</a>
+                <a asp-page="./Download" asp-route-id="@item.ID">Download</a>
             </td>
         </tr>
 }

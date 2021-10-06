@@ -20,7 +20,7 @@ using TutorBuddy_MCsoft.Models;
 namespace TutorBuddy_MCsoft.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public class RegisterModel : PageModel
+    public class RegisterModel1 : PageModel
     {
         private readonly SignInManager<TutorBuddy_MCsoftUser> _signInManager;
         private readonly UserManager<TutorBuddy_MCsoftUser> _userManager;
@@ -28,7 +28,7 @@ namespace TutorBuddy_MCsoft.Areas.Identity.Pages.Account
         private readonly IEmailSender _emailSender;
         private readonly TutorBuddy_MCsoftContext _context;
 
-        public RegisterModel(
+        public RegisterModel1(
             UserManager<TutorBuddy_MCsoftUser> userManager,
             SignInManager<TutorBuddy_MCsoftUser> signInManager,
             ILogger<RegisterModel> logger,
@@ -44,8 +44,6 @@ namespace TutorBuddy_MCsoft.Areas.Identity.Pages.Account
 
         [BindProperty]
         public InputModel Input { get; set; }
-
-        public IList<Module> Modules { get; set; }
 
         public string ReturnUrl { get; set; }
 
@@ -80,40 +78,28 @@ namespace TutorBuddy_MCsoft.Areas.Identity.Pages.Account
             public string username { get; set; }
 
             [Required]
-            [DataType(DataType.Currency)]
-            public double fee { get; set; }
-
-            
+            [DataType(DataType.Text)]
+            public string levelOfStudy { get; set; }
         }
-
 
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            Modules = _context.Modules.ToList();
         }
 
-        public async Task<IActionResult> OnPostAsync(string[] selectedModules, string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new TutorBuddy_MCsoftUser { UserName = Input.Email, Email = Input.Email, StudentNumber = Input.studentNumber, Role = "tutor"};
+                var user = new TutorBuddy_MCsoftUser { UserName = Input.Email, Email = Input.Email, StudentNumber = Input.studentNumber, Role = "student"};
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    Tutor tutor = new() { StudentNumber = Input.studentNumber, UserName = Input.username, EmailAddress = Input.Email, Fee = Input.fee, Approved = false, AvgRating = 0 };
-                    _context.Tutors.Add(tutor);
-
-                    List<ModulesTutored> selected = new();
-                    foreach (var module in selectedModules)
-                    {
-                        var foundModule = _context.Modules.Find(module);
-                        selected.Add(new() { StudentNumber = tutor.StudentNumber, Tutor = tutor, ModuleID = foundModule.ModuleID, Module = foundModule});
-                    }
-                    _context.ModulesTutored.AddRange(selected);
+                    Student student = new() { StudentNumber = Input.studentNumber, UserName = Input.username, EmailAddress = Input.Email, LevelOfStudy = Input.levelOfStudy};
+                    _context.Student.Add(student);
                     _context.SaveChanges();
                     _logger.LogInformation("User created a new account with password.");
 

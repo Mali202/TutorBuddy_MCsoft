@@ -10,7 +10,7 @@ namespace TutorBuddy_MCsoft.Models
         public int StudentNumber { get; set; }
         public Tutor Tutor { get; set; }
 
-        public int ModuleCode { get; set; }
+        public int ModuleID { get; set; }
         public Module Module { get; set; }
     }
 }

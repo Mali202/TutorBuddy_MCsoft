@@ -30,6 +30,9 @@
             <th>
                 Modules
             </th>
+            <th>
+
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -47,8 +50,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.AvgRating)
             </td>
+                @foreach(var module in item.ModulesTutored)
+                {
+                    <b>module.Module.ModuleName;</b>
+                }
             <td>
-              
+              <a asp-page="">Book Session</a>
             </td>
         </tr> 
 	}

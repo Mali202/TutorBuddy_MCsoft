@@ -12,8 +12,21 @@ namespace TutorBuddy_MCsoft.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ModulesTutored>().HasKey(sc => new { sc.StudentNumber, sc.ModuleCode });
+            modelBuilder.Entity<ModulesTutored>().HasKey(sc => new { sc.StudentNumber, sc.ModuleID });
+            modelBuilder.Entity<ModulesTutored>()
+                .HasOne<Tutor>(sc => sc.Tutor)
+                .WithMany(s => s.ModulesTutored)
+                .HasForeignKey(s => s.StudentNumber);
+            modelBuilder.Entity<ModulesTutored>()
+                .HasOne<Module>(sc => sc.Module)
+                .WithMany(s => s.ModulesTutored)
+                .HasForeignKey(s => s.ModuleID);
+
             modelBuilder.Entity<StudentGroupBooking>().HasKey(sc => new { sc.StudentNumber, sc.BookingID });
+            modelBuilder.Entity<StudentGroupBooking>()
+                .HasOne<GroupBooking>(sc => sc.Booking)
+                .WithMany(s => s.Students)
+                .HasForeignKey(s => s.BookingID);
         }
 
         public DbSet<Student> Student { get; set; }

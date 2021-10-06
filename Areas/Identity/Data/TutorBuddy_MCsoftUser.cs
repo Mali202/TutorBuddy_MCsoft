@@ -11,5 +11,6 @@ namespace TutorBuddy_MCsoft.Areas.Identity.Data
     {
         [PersonalData]
         public int StudentNumber { get; set; }
+        public string Role { get; set; }
     }
 }

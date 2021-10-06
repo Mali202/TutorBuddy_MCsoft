@@ -23,7 +23,7 @@ namespace TutorBuddy.Pages.Tutors
 
         public async Task OnGetAsync()
         {
-            Tutor = await _context.Tutors.ToListAsync();
+            Tutor = await _context.Tutors.Include(t => t.ModulesTutored).ToListAsync();
         }
     }
 }

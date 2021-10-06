@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TutorBuddy_MCsoft.Data;
 
 namespace TutorBuddy_MCsoft.Migrations
 {
     [DbContext(typeof(TutorBuddy_MCsoftContext))]
-    partial class TutorBuddy_MCsoftContextModelSnapshot : ModelSnapshot
+    [Migration("20211006030959_modulecodes")]
+    partial class modulecodes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,17 +64,13 @@ namespace TutorBuddy_MCsoft.Migrations
 
             modelBuilder.Entity("TutorBuddy_MCsoft.Models.Module", b =>
                 {
-                    b.Property<int>("ModuleID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
                     b.Property<string>("ModuleCode")
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("ModuleName")
                         .HasColumnType("longtext");
 
-                    b.HasKey("ModuleID");
+                    b.HasKey("ModuleCode");
 
                     b.ToTable("Modules");
                 });
@@ -82,12 +80,12 @@ namespace TutorBuddy_MCsoft.Migrations
                     b.Property<int>("StudentNumber")
                         .HasColumnType("int");
 
-                    b.Property<int>("ModuleID")
-                        .HasColumnType("int");
+                    b.Property<string>("ModuleCode")
+                        .HasColumnType("varchar(255)");
 
-                    b.HasKey("StudentNumber", "ModuleID");
+                    b.HasKey("StudentNumber", "ModuleCode");
 
-                    b.HasIndex("ModuleID");
+                    b.HasIndex("ModuleCode");
 
                     b.ToTable("ModulesTutored");
                 });
@@ -101,8 +99,8 @@ namespace TutorBuddy_MCsoft.Migrations
                     b.Property<string>("Link")
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("ModuleID")
-                        .HasColumnType("int");
+                    b.Property<string>("ModuleCode")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Name")
                         .HasColumnType("longtext");
@@ -112,7 +110,7 @@ namespace TutorBuddy_MCsoft.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ModuleID");
+                    b.HasIndex("ModuleCode");
 
                     b.ToTable("Resources");
                 });
@@ -156,8 +154,8 @@ namespace TutorBuddy_MCsoft.Migrations
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int?>("ModuleTutorModuleID")
-                        .HasColumnType("int");
+                    b.Property<string>("ModuleTutorModuleCode")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<int?>("ModuleTutorStudentNumber")
                         .HasColumnType("int");
@@ -170,7 +168,7 @@ namespace TutorBuddy_MCsoft.Migrations
 
                     b.HasKey("SessionID");
 
-                    b.HasIndex("ModuleTutorStudentNumber", "ModuleTutorModuleID");
+                    b.HasIndex("ModuleTutorStudentNumber", "ModuleTutorModuleCode");
 
                     b.ToTable("Sessions");
                 });
@@ -203,9 +201,14 @@ namespace TutorBuddy_MCsoft.Migrations
                     b.Property<int>("BookingID")
                         .HasColumnType("int");
 
+                    b.Property<int?>("StudentNumber1")
+                        .HasColumnType("int");
+
                     b.HasKey("StudentNumber", "BookingID");
 
                     b.HasIndex("BookingID");
+
+                    b.HasIndex("StudentNumber1");
 
                     b.ToTable("StudentGroupBooking");
                 });
@@ -264,7 +267,7 @@ namespace TutorBuddy_MCsoft.Migrations
                 {
                     b.HasOne("TutorBuddy_MCsoft.Models.Module", "Module")
                         .WithMany("ModulesTutored")
-                        .HasForeignKey("ModuleID")
+                        .HasForeignKey("ModuleCode")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -283,7 +286,7 @@ namespace TutorBuddy_MCsoft.Migrations
                 {
                     b.HasOne("TutorBuddy_MCsoft.Models.Module", "Module")
                         .WithMany()
-                        .HasForeignKey("ModuleID");
+                        .HasForeignKey("ModuleCode");
 
                     b.Navigation("Module");
                 });
@@ -307,7 +310,7 @@ namespace TutorBuddy_MCsoft.Migrations
                 {
                     b.HasOne("TutorBuddy_MCsoft.Models.ModulesTutored", "ModuleTutor")
                         .WithMany()
-                        .HasForeignKey("ModuleTutorStudentNumber", "ModuleTutorModuleID");
+                        .HasForeignKey("ModuleTutorStudentNumber", "ModuleTutorModuleCode");
 
                     b.Navigation("ModuleTutor");
                 });
@@ -322,9 +325,7 @@ namespace TutorBuddy_MCsoft.Migrations
 
                     b.HasOne("TutorBuddy_MCsoft.Models.Student", "Student")
                         .WithMany("Bookings")
-                        .HasForeignKey("StudentNumber")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("StudentNumber1");
 
                     b.Navigation("Booking");
 

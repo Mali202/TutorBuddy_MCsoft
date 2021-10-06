@@ -1,7 +1,7 @@
 ﻿@page
-@model RegisterModel
+@model RegisterModel1
 @{
-    ViewData["Title"] = "Register as Tutor";
+    ViewData["Title"] = "Register as Student";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -28,33 +28,9 @@
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.fee" class="control-label"></label>
-                <input asp-for="Input.fee" class="form-control" />
-                <span asp-validation-for="Input.fee" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label>Modules</label>
-                <div class="table">
-                    <table>
-                        <tr>
-                            @{
-                                int cnt = 0;
-
-                                foreach (var module in Model.Modules)
-                                {
-                                    if (cnt++ % 3 == 0)
-                                    {
-                                    @:</tr><tr>
-                                    }
-                                    @:<td>
-                                        <input type="checkbox" name="selectedModules" value="@module.ModuleID" />
-                                        @module.ModuleCode @: @module.ModuleName
-                                    @:</td>
-                                }
-                                @:</tr>
-                            }
-                        </table>
-                </div>
+                <label asp-for="Input.levelOfStudy" class="control-label"></label>
+                <input asp-for="Input.levelOfStudy" class="form-control" />
+                <span asp-validation-for="Input.levelOfStudy" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.Password"></label>

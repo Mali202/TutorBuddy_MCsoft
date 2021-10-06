@@ -42,7 +42,7 @@ namespace TutorBuddy_MCsoft
 
         public void bookSessionGroup(GroupBooking booking)
         {
-            
+            _context.GroupBookings.Add(booking);
             _context.SaveChanges();
         }
 
@@ -56,11 +56,6 @@ namespace TutorBuddy_MCsoft
         {
             groupBooking.Paid = true;
             _context.SaveChanges();
-        }
-
-        public void downloadNotes()
-        {
-
         }
 
         public void rateTutor()

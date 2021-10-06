@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using TutorBuddy.Data;
-using TutorBuddy.Models;
+using TutorBuddy_MCsoft.Data;
+using TutorBuddy_MCsoft.Models;
 
 namespace TutorBuddy.Pages.Resources
 {
     public class IndexModel : PageModel
     {
-        private readonly TutorBuddy.Data.TutorBuddyContext _context;
+        private readonly TutorBuddy_MCsoftContext _context;
 
-        public IndexModel(TutorBuddy.Data.TutorBuddyContext context)
+        public IndexModel(TutorBuddy_MCsoftContext context)
         {
             _context = context;
         }
@@ -23,7 +23,7 @@ namespace TutorBuddy.Pages.Resources
 
         public async Task OnGetAsync()
         {
-            Resource = await _context.Resource.ToListAsync();
+            Resource = await _context.Resources.ToListAsync();
         }
     }
 }

@@ -37,5 +37,6 @@ namespace TutorBuddy_MCsoft.Data
         public DbSet<Session> Sessions { get; set; }
         public DbSet<ModulesTutored> ModulesTutored { get; set; }
         public DbSet<IndividualBooking> IndividualBookings { get; set; }
+        public DbSet<GroupBooking> GroupBookings { get; set; }
     }
 }

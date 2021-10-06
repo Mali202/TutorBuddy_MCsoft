@@ -1,0 +1,49 @@
+﻿@page
+@model TutorBuddy.Pages.Sessions.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Book Session</h1>
+
+<h4>With Tutor: @Model.moduleTutor.Tutor.UserName</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Session.SessionDate" class="control-label"></label>
+                <input asp-for="Session.SessionDate" class="form-control" />
+                <span asp-validation-for="Session.SessionDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Session.StartTime" class="control-label"></label>
+                <input asp-for="Session.StartTime" class="form-control" />
+                <span asp-validation-for="Session.StartTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Session.EndTime" class="control-label"></label>
+                <input asp-for="Session.EndTime" class="form-control" />
+                <span asp-validation-for="Session.EndTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Session.AmountOfPeople" class="control-label"></label>
+                <input asp-for="Session.AmountOfPeople" class="form-control" />
+                <span asp-validation-for="Session.AmountOfPeople" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Book" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to Tutor</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

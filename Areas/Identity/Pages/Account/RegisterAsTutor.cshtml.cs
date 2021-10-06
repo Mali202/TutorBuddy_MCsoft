@@ -110,7 +110,7 @@ namespace TutorBuddy_MCsoft.Areas.Identity.Pages.Account
                     List<ModulesTutored> selected = new();
                     foreach (var module in selectedModules)
                     {
-                        var foundModule = _context.Modules.Find(module);
+                        var foundModule = _context.Modules.Find(int.Parse(module));
                         selected.Add(new() { StudentNumber = tutor.StudentNumber, Tutor = tutor, ModuleID = foundModule.ModuleID, Module = foundModule});
                     }
                     _context.ModulesTutored.AddRange(selected);

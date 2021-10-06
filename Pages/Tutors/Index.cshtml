@@ -42,7 +42,7 @@
 		<tr>
             <td>
                 @Html.DisplayFor(modelItem => item.UserName) |
-                <a asp-page="./Details" asp-route-id="@item.StudentNumber">Details</a>
+                @*<a asp-page="./Details" asp-route-id="@item.StudentNumber">Details</a>*@
             </td>
             <td>
                 R @Html.DisplayFor(modelItem => item.Fee)
@@ -50,12 +50,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.AvgRating)
             </td>
-                @foreach(var module in item.ModulesTutored)
-                {
-                    <b>module.Module.ModuleName;</b>
-                }
             <td>
-              <a asp-page="">Book Session</a>
+                @foreach (var module in item.ModulesTutored)
+                {
+                    @module.Module.ModuleName;
+                }
+            </td>
+            <td>
+              <a asp-page="./BookSession" asp-route-ts="@item.StudentNumber" asp-route-ss="@Model._user.StudentNumber">Book Session</a>
             </td>
         </tr> 
 	}

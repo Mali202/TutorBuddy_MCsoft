@@ -9,8 +9,8 @@ using TutorBuddy_MCsoft.Areas.Identity.Data;
 namespace TutorBuddy_MCsoft.Migrations.Identity
 {
     [DbContext(typeof(IdentityContext))]
-    [Migration("20211004233500_userrole")]
-    partial class userrole
+    [Migration("20211006052214_Initiali")]
+    partial class Initiali
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

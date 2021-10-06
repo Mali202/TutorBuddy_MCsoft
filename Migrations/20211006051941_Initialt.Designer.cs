@@ -9,8 +9,8 @@ using TutorBuddy_MCsoft.Data;
 namespace TutorBuddy_MCsoft.Migrations
 {
     [DbContext(typeof(TutorBuddy_MCsoftContext))]
-    [Migration("20211006044624_fk4")]
-    partial class fk4
+    [Migration("20211006051941_Initialt")]
+    partial class Initialt
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

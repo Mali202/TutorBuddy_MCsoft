@@ -31,7 +31,7 @@ namespace TutorBuddy.Pages.Sessions
             {
                 return NotFound();
             }
-            moduleTutor = await _context.ModulesTutored.FirstOrDefaultAsync(t => t.StudentNumber == ts);
+            moduleTutor = await _context.ModulesTutored.Include(t => t.Tutor).FirstOrDefaultAsync(t => t.StudentNumber == ts);
             student = await _context.Student.FirstOrDefaultAsync(s => s.StudentNumber == ss);
             return Page();
         }

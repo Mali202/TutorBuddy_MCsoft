@@ -34,9 +34,15 @@ namespace TutorBuddy_MCsoft
             return _context.Tutors.ToList();
         }
 
-        public void bookSession(Session session)
+        public void bookSessionIndividual(IndividualBooking booking)
         {
-            _context.Sessions.Add(session);
+            _context.IndividualBookings.Add(booking);
+            _context.SaveChanges();
+        }
+
+        public void bookSessionGroup(GroupBooking booking)
+        {
+            
             _context.SaveChanges();
         }
 

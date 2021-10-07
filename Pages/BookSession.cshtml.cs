@@ -42,7 +42,7 @@ namespace TutorBuddy.Pages.Sessions
                                                     Text = mt.Module.ModuleName
                                                 }).ToList();
 
-           
+            tutor = await _context.Tutors.FirstOrDefaultAsync(t => t.StudentNumber == ts);
             return Page();
         }
 

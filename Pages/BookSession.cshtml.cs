@@ -42,8 +42,7 @@ namespace TutorBuddy.Pages.Sessions
                                                     Text = mt.Module.ModuleName
                                                 }).ToList();
 
-            tutor = await _context.Tutors.FirstOrDefaultAsync(t => t.StudentNumber == ts);
-            student = await _context.Student.FirstOrDefaultAsync(s => s.StudentNumber == ss);
+           
             return Page();
         }
 

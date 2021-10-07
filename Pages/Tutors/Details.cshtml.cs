@@ -16,10 +16,10 @@ namespace TutorBuddy.Pages.Tutors
         private readonly TutorBuddy_MCsoftContext _context;
         private readonly Use_Cases use_;
 
-        public DetailsModel(TutorBuddy_MCsoftContext context, Use_Cases use_Cases)
+        public DetailsModel(TutorBuddy_MCsoftContext context)
         {
             _context = context;
-            use_ = use_Cases;
+            use_ = new Use_Cases(_context);
         }
 
         public Tutor Tutor { get; set; }

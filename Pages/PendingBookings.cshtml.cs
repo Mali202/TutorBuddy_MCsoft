@@ -28,7 +28,7 @@ namespace TutorBuddy_MCsoft.Pages
         public async Task OnGetAsync(int? id)
         {
             TutorBuddy_MCsoftUser user = await _usermanager.GetUserAsync(User);
-            IndividualBooking = await _context.IndividualBookings.Where(ib => ib.Session.ModuleTutor.Tutor.StudentNumber == id).ToListAsync();
+            IndividualBooking = await _context.IndividualBookings.Include(ib => ib.Session).Where(ib => ib.Session.ModuleTutor.Tutor.StudentNumber == id).ToListAsync();
         }
     }
 }

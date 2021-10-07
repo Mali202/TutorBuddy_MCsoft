@@ -96,6 +96,7 @@ namespace TutorBuddy_MCsoft.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string[] selectedModules, string returnUrl = null)
         {
+            Modules = _context.Modules.ToList();
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)

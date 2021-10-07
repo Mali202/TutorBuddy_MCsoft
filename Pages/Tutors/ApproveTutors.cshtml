@@ -1,0 +1,59 @@
+﻿@page
+@model TutorBuddy_MCsoft.Pages.Tutors.ApproveTutorsModel
+
+@{
+    ViewData["Title"] = "ApproveTutors";
+}
+
+<h1>ApproveTutors</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Tutor[0].UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tutor[0].EmailAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tutor[0].Approved)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tutor[0].Fee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tutor[0].AvgRating)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Tutor) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Approved)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AvgRating)
+            </td>
+            <td>
+                <a asp-page="./Details" asp-route-id="@item.StudentNumber">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.StudentNumber">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

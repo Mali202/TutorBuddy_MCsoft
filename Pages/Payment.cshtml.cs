@@ -5,24 +5,21 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using TutorBuddy_MCsoft;
 using TutorBuddy_MCsoft.Data;
 using TutorBuddy_MCsoft.Models;
 
-namespace TutorBuddy.Pages.Tutors
+namespace TutorBuddy_MCsoft.Pages
 {
-    public class DetailsModel : PageModel
+    public class PaymentModel : PageModel
     {
         private readonly TutorBuddy_MCsoftContext _context;
-        private readonly Use_Cases use_;
 
-        public DetailsModel(TutorBuddy_MCsoftContext context, Use_Cases use_Cases)
+        public PaymentModel(TutorBuddy_MCsoftContext context)
         {
             _context = context;
-            use_ = use_Cases;
         }
 
-        public Tutor Tutor { get; set; }
+        public Session Session { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -31,19 +28,13 @@ namespace TutorBuddy.Pages.Tutors
                 return NotFound();
             }
 
-            Tutor = await _context.Tutors.FirstOrDefaultAsync(m => m.StudentNumber == id);
+            Session = await _context.Sessions.Include(s => s.ModuleTutor.Tutor).FirstOrDefaultAsync(m => m.SessionID == id);
 
-            if (Tutor == null)
+            if (Session == null)
             {
                 return NotFound();
             }
             return Page();
-        }
-
-        public async Task<IActionResult> OnPostAsync()
-        {
-            use_.approveTutor(Tutor);
-            return RedirectToPage("./ApproveTutors");
         }
     }
 }

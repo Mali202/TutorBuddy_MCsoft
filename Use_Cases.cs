@@ -69,6 +69,11 @@ namespace TutorBuddy_MCsoft
             _context.SaveChanges();
         }
 
+        public void approveTutor(Tutor tutor)
+        {
+            tutor.Approved = true;
+            _context.SaveChanges();
+        }
 
     }
 

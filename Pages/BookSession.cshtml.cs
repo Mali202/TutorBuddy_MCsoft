@@ -25,13 +25,24 @@ namespace TutorBuddy.Pages.Sessions
             use_ = new Use_Cases(_context);
         }
 
+        public List<SelectListItem> Options { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? ts, int? ss)
         {
             if (ts == null || ss == null)
             {
                 return NotFound();
             }
-            moduleTutor = await _context.ModulesTutored.Include(t => t.Tutor).FirstOrDefaultAsync(t => t.StudentNumber == ts);
+
+            IList<ModulesTutored> modules = _context.ModulesTutored.Include(t => t.Tutor).Include(m => m.Module).ToList();
+            Options = modules.Select(mt =>
+                                                new SelectListItem
+                                                {
+                                                    Value = mt.Module.ModuleID.ToString(),
+                                                    Text = mt.Module.ModuleName
+                                                }).ToList();
+
+            tutor = await _context.Tutors.FirstOrDefaultAsync(t => t.StudentNumber == ts);
             student = await _context.Student.FirstOrDefaultAsync(s => s.StudentNumber == ss);
             return Page();
         }
@@ -39,20 +50,26 @@ namespace TutorBuddy.Pages.Sessions
         [BindProperty]
         public Session Session { get; set; }
 
+        public Tutor tutor { get; set; }
         public ModulesTutored moduleTutor { get; set; }
         public Student student { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync(int? ts, int? ss)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
+            tutor = await _context.Tutors.FirstOrDefaultAsync(t => t.StudentNumber == ts);
+            student = await _context.Student.FirstOrDefaultAsync(s => s.StudentNumber == ss);
+            int id = int.Parse(Request.Form["modID"]);
+            moduleTutor = _context.ModulesTutored.FirstOrDefault(mt => (mt.StudentNumber == tutor.StudentNumber) && (mt.ModuleID == id));
+            Session.ModuleTutor = moduleTutor;
             IndividualBooking booking = new() { Paid = false, Session = Session, Student = student };
             use_.bookSessionIndividual(booking);
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Payment", new { id = booking.Session.SessionID });
         }
     }
 }

@@ -7,7 +7,7 @@
 
 <h1>Book Session</h1>
 
-<h4>With Tutor: @Model.moduleTutor.Tutor.UserName</h4>
+<h4>With Tutor: @Model.tutor.UserName</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -32,6 +32,10 @@
                 <label asp-for="Session.AmountOfPeople" class="control-label"></label>
                 <input asp-for="Session.AmountOfPeople" class="form-control" />
                 <span asp-validation-for="Session.AmountOfPeople" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Module</label>
+                <select name="modID" asp-items="Model.Options"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Book" class="btn btn-primary" />

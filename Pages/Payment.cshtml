@@ -1,0 +1,42 @@
+﻿@page
+@model TutorBuddy_MCsoft.Pages.PaymentModel
+
+@{
+    ViewData["Title"] = "Payment";
+}
+
+<h1>Payment</h1>
+
+<div>
+    <h4>With Tutor: @Model.Session.ModuleTutor.Tutor.UserName</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Session.SessionDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Session.SessionDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Session.StartTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Session.StartTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Session.EndTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Session.EndTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Session.AmountOfPeople)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Session.AmountOfPeople)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a href="">Proceed to Payment</a>
+</div>

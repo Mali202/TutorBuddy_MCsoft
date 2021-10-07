@@ -40,8 +40,9 @@ namespace TutorBuddy.Pages.Tutors
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
+            Tutor = await _context.Tutors.FirstOrDefaultAsync(m => m.StudentNumber == id);
             use_.approveTutor(Tutor);
             return RedirectToPage("./ApproveTutors");
         }

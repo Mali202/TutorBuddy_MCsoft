@@ -1,0 +1,38 @@
+﻿@page
+@model TutorBuddy_MCsoft.Pages.BankDetailsModel
+
+@{
+    ViewData["Title"] = "BankDetails";
+}
+
+<h1>Bank Details</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BankDetails.HolderName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BankDetails.HolderName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BankDetails.BankName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BankDetails.BankName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BankDetails.AccNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BankDetails.AccNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BankDetails.Ref)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BankDetails.Ref)
+        </dd>
+    </dl>
+</div>

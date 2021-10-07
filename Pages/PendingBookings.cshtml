@@ -14,7 +14,10 @@
                 @Html.DisplayNameFor(model => model.IndividualBooking[0].Paid)
             </th>
             <th>
-
+                Student
+            </th>
+            <th>
+                Start Time
             </th>
             <th></th>
         </tr>
@@ -26,7 +29,13 @@
                 @Html.DisplayFor(modelItem => item.Paid)
             </td>
             <td>
-                <a asp-page="./Details" asp-route-id="@item.BookingID">Details</a>
+                @Html.DisplayFor(modelitem => item.Student.StudentNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelitem => item.Session.StartTime)
+            </td>
+            <td>
+                <a asp-page="./Confirm" asp-route-id="@item.BookingID">Details</a>
             </td>
         </tr>
 }

@@ -11,9 +11,6 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.IndividualBooking[0].Paid)
-            </th>
-            <th>
                 Student
             </th>
             <th>
@@ -26,16 +23,13 @@
 @foreach (var item in Model.IndividualBooking) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Paid)
-            </td>
-            <td>
                 @Html.DisplayFor(modelitem => item.Student.StudentNumber)
             </td>
             <td>
                 @Html.DisplayFor(modelitem => item.Session.StartTime)
             </td>
             <td>
-                <a asp-page="./Confirm" asp-route-id="@item.BookingID">Details</a>
+                <a asp-page="./Confirm" asp-route-id="@item.Session.SessionID">Details</a>
             </td>
         </tr>
 }

@@ -18,8 +18,9 @@
         }
         @if (UserManager.GetUserAsync(User).Result.Role == "tutor")
         {
+
             <li class="nav-item">
-                <a class="nav-link text-dark" asp-page="./PendingBookings">Bookings</a>
+                <a class="nav-link text-dark" asp-page="./PendingBookings" asp-route="@UserManager.GetUserAsync(User).Result.StudentNumber">Bookings</a>
             </li>
         }
         <li class="nav-item">

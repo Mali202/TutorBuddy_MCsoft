@@ -13,10 +13,12 @@ namespace TutorBuddy_MCsoft.Pages
     public class ConfirmPaymentModel : PageModel
     {
         private readonly TutorBuddy_MCsoft.Data.TutorBuddy_MCsoftContext _context;
+        private readonly Use_Cases use_;
 
         public ConfirmPaymentModel(TutorBuddy_MCsoft.Data.TutorBuddy_MCsoftContext context)
         {
             _context = context;
+            use_ = new Use_Cases(_context);
         }
 
         public IndividualBooking IndividualBooking { get; set; }
@@ -41,9 +43,8 @@ namespace TutorBuddy_MCsoft.Pages
 
         public async Task<IActionResult> onPostAsync(int? id)
         {
-            IndividualBooking = await _context.IndividualBookings.FirstOrDefaultAsync(ib => ib.BookingID == id);
-            IndividualBooking.Paid = true;
-            await _context.SaveChangesAsync();
+            IndividualBooking = await _context.IndividualBookings.FirstOrDefaultAsync(m => m.BookingID == id);
+            use_.makePaymentIndividual(IndividualBooking);
             return RedirectToPage("./UnpaidBookings");
         }
     }

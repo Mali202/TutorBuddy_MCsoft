@@ -16,6 +16,9 @@
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-page="./Tutors/ApproveTutors">Manage Tutors</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-page="./UnpaidBookings">Confirm Payments</a>
+            </li>
         }
         @if (UserManager.GetUserAsync(User).Result.Role == "tutor")
         {

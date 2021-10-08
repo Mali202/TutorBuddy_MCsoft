@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TutorBuddy_MCsoft.Areas.Identity.Data;
 using TutorBuddy_MCsoft.Data;
 using TutorBuddy_MCsoft.Models;
 
@@ -75,6 +76,18 @@ namespace TutorBuddy_MCsoft
             _context.SaveChanges();
         }
 
+        public static string greeting(TutorBuddy_MCsoftContext context, TutorBuddy_MCsoftUser user)
+        {
+            if (user.Role == "admin")
+            {
+                return "Admin";
+            }
+            if (user.Role == "tutor")
+            {
+                return context.Tutors.FirstOrDefault(t => t.StudentNumber == user.StudentNumber).UserName;
+            }
+            return context.Student.FirstOrDefault(t => t.StudentNumber == user.StudentNumber).UserName;
+        }
     }
 
 }

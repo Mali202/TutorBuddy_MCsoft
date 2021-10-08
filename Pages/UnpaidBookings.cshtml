@@ -1,17 +1,20 @@
 ﻿@page
-@model TutorBuddy_MCsoft.Pages.PendingBookingsModel
+@model TutorBuddy_MCsoft.Pages.UnpaidBookingsModel
 
 @{
-    ViewData["Title"] = "PendingBookings";
+    ViewData["Title"] = "UnpaidBookings";
 }
 
-<h1>Pending Bookings</h1>
+<h1>UnpaidBookings</h1>
 
 <table class="table">
     <thead>
         <tr>
             <th>
                 Student
+            </th>
+            <th>
+                Tutor
             </th>
             <th>
                 Date
@@ -32,7 +35,10 @@
 @foreach (var item in Model.IndividualBooking) {
         <tr>
             <td>
-                @Html.DisplayFor(modelitem => item.Student.StudentNumber)
+                @Html.DisplayFor(modelitem => item.Student.UserName)
+            </td>
+            <td>
+
             </td>
             <td>
                 @Html.DisplayFor(modelitem => item.Session.SessionDate)
@@ -47,7 +53,9 @@
                 @Html.DisplayFor(modelitem => item.Session.ModuleTutor.Module.ModuleName)
             </td>
             <td>
-                <a asp-page="./ConfirmBooking" asp-route-id="@item.Session.SessionID">Details</a>
+               
+                <a asp-page="./ConfirmPayment" asp-route-id="@item.BookingID">Details</a>
+              
             </td>
         </tr>
 }

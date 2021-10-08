@@ -3,12 +3,13 @@
 
 @inject SignInManager<TutorBuddy_MCsoftUser> SignInManager
 @inject UserManager<TutorBuddy_MCsoftUser> UserManager
+@inject TutorBuddy_MCsoft.Data.TutorBuddy_MCsoftContext context
 
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">
-            <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+            <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @Use_Cases.greeting(context, UserManager.GetUserAsync(User).Result)!</a>
         </li>
         @if (UserManager.GetUserAsync(User).Result.Role == "admin")
         {
@@ -21,6 +22,9 @@
 
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-page="./PendingBookings" asp-route-id="@UserManager.GetUserAsync(User).Result.StudentNumber">Bookings</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-page="./CreateResource">Upload Notes</a>
             </li>
         }
         <li class="nav-item">

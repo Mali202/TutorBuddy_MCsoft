@@ -34,7 +34,7 @@ namespace TutorBuddy.Pages.Sessions
                 return NotFound();
             }
 
-            IList<ModulesTutored> modules = _context.ModulesTutored.Include(t => t.Tutor).Include(m => m.Module).ToList();
+            IList<ModulesTutored> modules = _context.ModulesTutored.Include(t => t.Tutor).Include(m => m.Module).Where(mt => mt.StudentNumber == ts).ToList();
             Options = modules.Select(mt =>
                                                 new SelectListItem
                                                 {

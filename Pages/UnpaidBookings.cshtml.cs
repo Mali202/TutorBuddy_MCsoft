@@ -23,7 +23,7 @@ namespace TutorBuddy_MCsoft.Pages
 
         public async Task OnGetAsync()
         {
-            IndividualBooking = await _context.IndividualBookings.Include(ib => ib.Student).Include(ib => ib.Session).ThenInclude(s => s.ModuleTutor).ThenInclude(mt => mt.Module).Where(ib => !ib.Paid).ToListAsync();
+            IndividualBooking = await _context.IndividualBookings.Include(ib => ib.Student).Include(ib => ib.Session).ThenInclude(s => s.ModuleTutor).ThenInclude(mt => mt.Tutor).Include(ib => ib.Session).ThenInclude(s => s.ModuleTutor).ThenInclude(mt => mt.Module).Where(ib => !ib.Paid).ToListAsync();
         }
     }
 }

@@ -41,7 +41,7 @@ namespace TutorBuddy_MCsoft.Pages
             return Page();
         }
 
-        public async Task<IActionResult> onPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
             IndividualBooking = await _context.IndividualBookings.FirstOrDefaultAsync(m => m.BookingID == id);
             use_.makePaymentIndividual(IndividualBooking);

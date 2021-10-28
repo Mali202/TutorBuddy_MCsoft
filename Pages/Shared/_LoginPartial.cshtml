@@ -20,10 +20,10 @@
                 <a class="nav-link text-dark" asp-page="./UnpaidBookings">Confirm Payments</a>
             </li>
         }
-        @if (UserManager.GetUserAsync(User).Result.Role == "admin")
+        @if (UserManager.GetUserAsync(User).Result.Role == "student")
         {
             <li class="nav-item">
-                <a class="nav-link text-dark" asp-page="./Sessions">Sessions</a>
+                <a class="nav-link text-dark" asp-page="./Sessions" asp-route-ss="@UserManager.GetUserAsync(User).Result.StudentNumber">Sessions</a>
             </li>
         }
         @if (UserManager.GetUserAsync(User).Result.Role == "tutor")

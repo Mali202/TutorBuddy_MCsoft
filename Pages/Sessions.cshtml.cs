@@ -20,10 +20,13 @@ namespace TutorBuddy_MCsoft.Pages
         }
 
         public IList<Session> Session { get;set; }
+        public IList<IndividualBooking> bookings { get; set; }
+        public int? studentNum { get; set; }
 
         public async Task OnGetAsync(int? ss)
         {
-            IList<IndividualBooking> bookings = await _context.IndividualBookings.Where(ib => ib.Student.StudentNumber == ss).ToListAsync(); 
+            studentNum = ss;
+            bookings = await _context.IndividualBookings.Include(ib => ib.Session).ThenInclude(s => s.ModuleTutor).ThenInclude(mt => mt.StudentNumber).Where(ib => ib.Student.StudentNumber == ss).ToListAsync(); 
             Session = bookings.Select(ib => ib.Session).ToList();
         }
     }

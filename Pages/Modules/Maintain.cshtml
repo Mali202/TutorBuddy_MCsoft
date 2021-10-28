@@ -8,7 +8,7 @@
 <h1>Maintain</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create">Add New Module</a>
 </p>
 <table class="table">
     <thead>
@@ -32,7 +32,6 @@
                 @Html.DisplayFor(modelItem => item.ModuleName)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.ModuleID">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.ModuleID">Details</a> |
                 <a asp-page="./Delete" asp-route-id="@item.ModuleID">Delete</a>
             </td>

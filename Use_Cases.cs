@@ -63,6 +63,11 @@ namespace TutorBuddy_MCsoft
         {
             _context.Reviews.Add(review);
             _context.SaveChanges();
+            Tutor cur = review.Tutor;
+            IEnumerable<Review> reviews = _context.Reviews.Where(rv => rv.Tutor == cur);
+            double avg = reviews.Sum(rv => rv.Rating) / (double) reviews.Count();
+            cur.AvgRating = avg;
+            _context.SaveChanges();
         }
 
         public void addTutor(Tutor tutor)

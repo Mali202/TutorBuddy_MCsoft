@@ -1,0 +1,38 @@
+﻿@page
+@model TutorBuddy_MCsoft.Pages.RateTutorModel
+@{
+    ViewData["Title"] = "Rate Tutor";
+}
+<h1>Rate Tutor</h1>
+
+<p>Tutor: @Model.tutor.UserName</p>
+<hr />
+
+<form method="post">
+    <div class="form-group">
+        <label class="control-label">Rating</label>
+        <div class="star-rating">
+            <input type="radio" name="stars" id="star-a" value="5" />
+            <label for="star-a"></label>
+
+            <input type="radio" name="stars" id="star-b" value="4" />
+            <label for="star-b"></label>
+
+            <input type="radio" name="stars" id="star-c" value="3" />
+            <label for="star-c"></label>
+
+            <input type="radio" name="stars" id="star-d" value="2" />
+            <label for="star-d"></label>
+
+            <input type="radio" name="stars" id="star-e" value="1" />
+            <label for="star-e"></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Additional Comments:"></label>
+        <textarea rows="4" cols="20" name="comment"></textarea>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Submit Rating" class="btn btn-primary" />
+    </div>
+</form>

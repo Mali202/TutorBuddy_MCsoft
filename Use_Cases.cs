@@ -59,9 +59,10 @@ namespace TutorBuddy_MCsoft
             _context.SaveChanges();
         }
 
-        public void rateTutor()
+        public void addReview(Review review)
         {
-
+            _context.Reviews.Add(review);
+            _context.SaveChanges();
         }
 
         public void addTutor(Tutor tutor)

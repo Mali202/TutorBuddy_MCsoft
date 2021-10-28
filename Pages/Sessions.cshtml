@@ -1,0 +1,51 @@
+﻿@page
+@model TutorBuddy_MCsoft.Pages.SessionsModel
+
+@{
+    ViewData["Title"] = "Sessions";
+}
+
+<h1>Sessions</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Session[0].SessionDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Session[0].StartTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Session[0].EndTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Session[0].AmountOfPeople)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Session) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SessionDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AmountOfPeople)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.SessionID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.SessionID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.SessionID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

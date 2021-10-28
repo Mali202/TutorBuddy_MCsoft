@@ -20,6 +20,12 @@
                 <a class="nav-link text-dark" asp-page="./UnpaidBookings">Confirm Payments</a>
             </li>
         }
+        @if (UserManager.GetUserAsync(User).Result.Role == "admin")
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-page="./Sessions">Sessions</a>
+            </li>
+        }
         @if (UserManager.GetUserAsync(User).Result.Role == "tutor")
         {
 

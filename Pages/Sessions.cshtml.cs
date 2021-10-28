@@ -26,7 +26,7 @@ namespace TutorBuddy_MCsoft.Pages
         public async Task OnGetAsync(int? ss)
         {
             studentNum = ss;
-            bookings = await _context.IndividualBookings.Include(ib => ib.Session).ThenInclude(s => s.ModuleTutor).ThenInclude(mt => mt.StudentNumber).Where(ib => ib.Student.StudentNumber == ss).ToListAsync(); 
+            bookings = await _context.IndividualBookings.Include(ib => ib.Session).ThenInclude(s => s.ModuleTutor).ThenInclude(mt => mt.Tutor).Where(ib => ib.Student.StudentNumber == ss).ToListAsync(); 
             Session = bookings.Select(ib => ib.Session).ToList();
         }
     }

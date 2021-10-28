@@ -40,7 +40,7 @@ namespace TutorBuddy_MCsoft.Pages
             student = await _context.Student.FirstOrDefaultAsync(s => s.StudentNumber == ss);
             double rating = stars != null ? double.Parse(stars) : 0;
             Review review = new() { Rating = rating, Comment = comment, Student = student, Tutor = tutor };
-            //use_.addReview(review);
+            use_.addReview(review);
             return RedirectToPage("./Index");
         }
     }

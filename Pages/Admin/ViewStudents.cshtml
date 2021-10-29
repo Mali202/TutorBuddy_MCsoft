@@ -1,0 +1,43 @@
+﻿@page
+@model TutorBuddy_MCsoft.Pages.ViewStudentsModel
+
+@{
+    ViewData["Title"] = "ViewStudents";
+}
+
+<h1>ViewStudents</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                User name
+            </th>
+            <th>
+                Email Address
+            </th>
+            <th>
+                Level of Study
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Student) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LevelOfStudy)
+            </td>
+            <td>
+                @*<a asp-page="./Details" asp-route-id="@item.StudentNumber">Details</a>*@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

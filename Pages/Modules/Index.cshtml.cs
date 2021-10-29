@@ -19,11 +19,20 @@ namespace TutorBuddy.Pages.Modules
             _context = context;
         }
 
-        public IList<Module> Module { get;set; }
+        public List<Module> Module { get;set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string sort)
         {
             Module = await _context.Modules.ToListAsync();
+            if(sort != null)
+            {
+                IList<Session> sessions = await _context.Sessions.ToListAsync();
+                foreach (Module item in Module)
+                {
+                    int count = sessions.Count(s => s.ModuleTutor.ModuleID == item.ModuleID);
+                }
+            }
+            
         }
     }
 }

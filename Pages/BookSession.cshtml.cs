@@ -11,6 +11,7 @@ using TutorBuddy_MCsoft;
 using Microsoft.AspNetCore.Identity;
 using TutorBuddy_MCsoft.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace TutorBuddy.Pages.Sessions
 {
@@ -56,14 +57,18 @@ namespace TutorBuddy.Pages.Sessions
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync(int? ts, int? ss)
         {
+            if(Session.StartTime > Session.EndTime)
+            {
+                ModelState.AddModelError(string.Empty, "Start time cannot be after end time");
+            }
+            tutor = await _context.Tutors.FirstOrDefaultAsync(t => t.StudentNumber == ts);
+            student = await _context.Student.FirstOrDefaultAsync(s => s.StudentNumber == ss);
+            int id = int.Parse(Request.Form["modID"]);
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-
-            tutor = await _context.Tutors.FirstOrDefaultAsync(t => t.StudentNumber == ts);
-            student = await _context.Student.FirstOrDefaultAsync(s => s.StudentNumber == ss);
-            int id = int.Parse(Request.Form["modID"]);
+            
             moduleTutor = _context.ModulesTutored.FirstOrDefault(mt => (mt.StudentNumber == tutor.StudentNumber) && (mt.ModuleID == id));
             Session.ModuleTutor = moduleTutor;
             IndividualBooking booking = new() { Paid = false, Session = Session, Student = student };

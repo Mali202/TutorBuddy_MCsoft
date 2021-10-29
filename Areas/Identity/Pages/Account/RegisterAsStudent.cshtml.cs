@@ -11,11 +11,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using TutorBuddy_MCsoft.Areas.Identity.Data;
 using TutorBuddy_MCsoft.Data;
-using TutorBuddy_MCsoft.Models;
+using TutorBuddy_MCsoft.Models; 
 
 namespace TutorBuddy_MCsoft.Areas.Identity.Pages.Account
 {
@@ -51,8 +52,8 @@ namespace TutorBuddy_MCsoft.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "The email address is required")]
+            [EmailAddress(ErrorMessage = "Invalid Email Address")]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
@@ -77,19 +78,25 @@ namespace TutorBuddy_MCsoft.Areas.Identity.Pages.Account
             [Display(Name = "UserName")]
             public string username { get; set; }
 
-            [Required]
-            [DataType(DataType.Text)]
-            public string levelOfStudy { get; set; }
         }
+
+        public List<SelectListItem> Options { get; set; }
 
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            Options = new List<SelectListItem>
+            {
+                new SelectListItem { Text = "1st Year", Value = "1" },
+                new SelectListItem { Text = "2nd Year", Value = "2" },
+                new SelectListItem { Text = "3rd Year", Value = "3" }
+            };
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
@@ -98,7 +105,7 @@ namespace TutorBuddy_MCsoft.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    Student student = new() { StudentNumber = Input.studentNumber, UserName = Input.username, EmailAddress = Input.Email, LevelOfStudy = Input.levelOfStudy};
+                    Student student = new() { StudentNumber = Input.studentNumber, UserName = Input.username, EmailAddress = Input.Email, LevelOfStudy = Request.Form["level"]};
                     _context.Student.Add(student);
                     _context.SaveChanges();
                     _logger.LogInformation("User created a new account with password.");

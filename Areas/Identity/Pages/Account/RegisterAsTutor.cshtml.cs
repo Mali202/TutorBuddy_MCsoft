@@ -53,8 +53,8 @@ namespace TutorBuddy_MCsoft.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "The email address is required")]
+            [EmailAddress(ErrorMessage = "Invalid Email Address")]
             [Display(Name = "Email")]
             public string Email { get; set; }
 

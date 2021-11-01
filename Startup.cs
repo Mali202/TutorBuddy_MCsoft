@@ -1,3 +1,5 @@
+using AspNetCoreHero.ToastNotification;
+using AspNetCoreHero.ToastNotification.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,7 +34,7 @@ namespace TutorBuddy_MCsoft
             //        options.UseSqlServer(Configuration.GetConnectionString("TutorBuddy_MCsoftContext")));
             services.AddDbContext<TutorBuddy_MCsoftContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(8, 0, 25))));
-            
+            services.AddNotyf(config => { config.DurationInSeconds = 10; config.IsDismissable = true; config.Position = NotyfPosition.BottomRight; });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,6 +62,7 @@ namespace TutorBuddy_MCsoft
             {
                 endpoints.MapRazorPages();
             });
+            app.UseNotyf();
         }
     }
 }

@@ -24,9 +24,11 @@ namespace TutorBuddy_MCsoft.Pages
         }
 
         public List<IndividualBooking> IndividualBooking { get;set; }
+        public int? ID { get; set; }
 
         public async Task OnGetAsync(int? id, string sort)
         {
+            ID = id;
             TutorBuddy_MCsoftUser user = await _usermanager.GetUserAsync(User);
             IndividualBooking = await _context.IndividualBookings.Include(ib => ib.Session).ThenInclude(s => s.ModuleTutor.Module).Include(ib => ib.Student).Where(ib => ib.Session.ModuleTutor.Tutor.StudentNumber == id).ToListAsync();
             if (sort != null)

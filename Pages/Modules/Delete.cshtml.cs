@@ -55,7 +55,7 @@ namespace TutorBuddy.Pages.Modules
                 _context.Modules.Remove(Module);
                 await _context.SaveChangesAsync();
             }
-            _notyf.Success("Module Deletd");
+            _notyf.Success("Module Deleted");
 
             return RedirectToPage("./Index");
         }

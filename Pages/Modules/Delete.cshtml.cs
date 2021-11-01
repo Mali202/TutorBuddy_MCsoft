@@ -25,14 +25,14 @@ namespace TutorBuddy.Pages.Modules
         [BindProperty]
         public Module Module { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string? id)
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Module = await _context.Modules.FirstOrDefaultAsync(m => m.ModuleCode == id);
+            Module = await _context.Modules.FindAsync(id);
 
             if (Module == null)
             {
@@ -54,8 +54,9 @@ namespace TutorBuddy.Pages.Modules
             {
                 _context.Modules.Remove(Module);
                 await _context.SaveChangesAsync();
+                _notyf.Success("Module Deleted");
             }
-            _notyf.Success("Module Deleted");
+            
 
             return RedirectToPage("./Index");
         }

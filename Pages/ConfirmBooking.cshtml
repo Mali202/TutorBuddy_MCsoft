@@ -37,10 +37,12 @@
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-page="./PendingBookings" asp-route-id="@Model.Session.SessionID" class="btn-primary">Confirm</a>
-    <form action="/" method="post">
-        <input type="submit" class="btn-primary" value="Reject"/>
+<div class="btn-group" role="group">
+    <form method="post">
+        <button type="submit" class="btn btn-secondary">Confirm</button>
+        <button class="btn btn-secondary">Reject</button>
     </form>
-    <a asp-page="./PendingBookings">Back to bookings</a>
+</div>
+<div>
+    <a asp-page="./PendingBookings" asp-route-id="@Model.Session.SessionID">Back to bookings</a>
 </div>

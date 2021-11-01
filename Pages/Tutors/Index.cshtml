@@ -6,15 +6,9 @@
 }
 
 <h1>Approved Tutors</h1>
-<form>
-    <p>
-        <select>
-            <option value="">Modules</option>
-        </select>
-        Username: <input type="text" />
-        <input type="submit" value="Filter" />
-    </p>
-</form>
+<p>
+    <a asp-page="/Tutors/Index" asp-route-sort="y"><button class="btn-primary">Sort by best rating</button></a>
+</p>
 <table class="table">
     <thead>
         <tr>

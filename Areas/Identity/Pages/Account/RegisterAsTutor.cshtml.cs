@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -27,19 +28,22 @@ namespace TutorBuddy_MCsoft.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly TutorBuddy_MCsoftContext _context;
+        private readonly INotyfService _notyf;
 
         public RegisterModel(
             UserManager<TutorBuddy_MCsoftUser> userManager,
             SignInManager<TutorBuddy_MCsoftUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            TutorBuddy_MCsoftContext context)
+            TutorBuddy_MCsoftContext context,
+            INotyfService notyf)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
             _context = context;
+            _notyf = notyf;
         }
 
         [BindProperty]
@@ -117,6 +121,7 @@ namespace TutorBuddy_MCsoft.Areas.Identity.Pages.Account
                     _context.ModulesTutored.AddRange(selected);
                     _context.SaveChanges();
                     _logger.LogInformation("User created a new account with password.");
+                    _notyf.Success("Account Created");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

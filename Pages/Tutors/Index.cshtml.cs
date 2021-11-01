@@ -28,10 +28,14 @@ namespace TutorBuddy.Pages.Tutors
         public IList<Tutor> Tutor { get;set; }
         public IList<Module> modules { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string sort)
         {
             Tutor = await _context.Tutors.Include(t => t.ModulesTutored).ThenInclude(m => m.Module).ToListAsync();
             _user = await _UserManager.GetUserAsync(User);
+            if(sort != null)
+            {
+                Tutor = Tutor.OrderByDescending(t => t.AvgRating).ToList();
+            }
         }
     }
 }

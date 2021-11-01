@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using TutorBuddy_MCsoft.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace TutorBuddy.Pages.Sessions
 {
@@ -19,11 +20,13 @@ namespace TutorBuddy.Pages.Sessions
     {
         private readonly TutorBuddy_MCsoftContext _context;
         private readonly Use_Cases use_;
+        private readonly INotyfService _notyf;
 
-        public CreateModel(TutorBuddy_MCsoftContext context)
+        public CreateModel(TutorBuddy_MCsoftContext context, INotyfService notyf)
         {
             _context = context;
             use_ = new Use_Cases(_context);
+            _notyf = notyf;
         }
 
         public List<SelectListItem> Options { get; set; }
@@ -73,6 +76,7 @@ namespace TutorBuddy.Pages.Sessions
             Session.ModuleTutor = moduleTutor;
             IndividualBooking booking = new() { Paid = false, Session = Session, Student = student };
             use_.bookSessionIndividual(booking);
+            _notyf.Success("Session Booked");
             return RedirectToPage("./Payment", new { id = booking.Session.SessionID });
         }
     }

@@ -15,11 +15,13 @@ namespace TutorBuddy_MCsoft.Pages
     {
         private readonly TutorBuddy_MCsoftContext _context;
         private readonly Use_Cases use_;
+        private readonly INotyfService _notyf;
 
-        public RateTutorModel(TutorBuddy_MCsoftContext context)
+        public RateTutorModel(TutorBuddy_MCsoftContext context, INotyfService notyf)
         {
             _context = context;
             use_ = new Use_Cases(_context);
+            _notyf = notyf;
         }
 
         public Tutor tutor { get; set; }
@@ -42,6 +44,7 @@ namespace TutorBuddy_MCsoft.Pages
             double rating = stars != null ? double.Parse(stars) : 0;
             Review review = new() { Rating = rating, Comment = comment, Student = student, Tutor = tutor };
             use_.addReview(review);
+            _notyf.Success("Tutor Rated");
             return RedirectToPage("./Index");
         }
     }

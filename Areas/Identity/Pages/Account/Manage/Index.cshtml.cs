@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -14,13 +15,15 @@ namespace TutorBuddy_MCsoft.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<TutorBuddy_MCsoftUser> _userManager;
         private readonly SignInManager<TutorBuddy_MCsoftUser> _signInManager;
+        private readonly INotyfService _notyf;
 
         public IndexModel(
             UserManager<TutorBuddy_MCsoftUser> userManager,
-            SignInManager<TutorBuddy_MCsoftUser> signInManager)
+            SignInManager<TutorBuddy_MCsoftUser> signInManager, INotyfService notyf)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _notyf = notyf;
         }
 
         public string Username { get; set; }
@@ -90,6 +93,8 @@ namespace TutorBuddy_MCsoft.Areas.Identity.Pages.Account.Manage
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
+            _notyf.Success("Changes Saved");
+
             return RedirectToPage();
         }
     }

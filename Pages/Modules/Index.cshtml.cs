@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,6 +25,7 @@ namespace TutorBuddy.Pages.Modules
         public async Task OnGetAsync(string sort)
         {
             Module = await _context.Modules.ToListAsync();
+
             if(sort != null)
             {
                 IList<Session> sessions = await _context.Sessions.ToListAsync();

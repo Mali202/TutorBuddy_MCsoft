@@ -28,6 +28,7 @@ namespace TutorBuddy.Pages.Modules
         public async Task OnGetAsync(string sort)
         {
             Module = await _context.Modules.ToListAsync();
+
             if(sort != null)
             {
                 IList<Session> sessions = await _context.Sessions.Include(s => s.ModuleTutor).ToListAsync();

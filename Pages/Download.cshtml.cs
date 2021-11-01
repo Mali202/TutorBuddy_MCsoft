@@ -28,7 +28,7 @@ namespace TutorBuddy.Pages.Resources
                 return NotFound();
             }
 
-            Resource = await _context.Resources.FirstOrDefaultAsync(m => m.ID == id);
+            Resource = await _context.Resources.Include(r => r.Module).FirstOrDefaultAsync(m => m.ID == id);
 
             if (Resource == null)
             {

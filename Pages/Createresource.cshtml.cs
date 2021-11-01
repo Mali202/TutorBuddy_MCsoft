@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -13,10 +14,12 @@ namespace TutorBuddy_MCsoft.Pages
     public class CreateresourceModel : PageModel
     {
         private readonly TutorBuddy_MCsoft.Data.TutorBuddy_MCsoftContext _context;
+        private readonly INotyfService _notyf;
 
-        public CreateresourceModel(TutorBuddy_MCsoft.Data.TutorBuddy_MCsoftContext context)
+        public CreateresourceModel(TutorBuddy_MCsoft.Data.TutorBuddy_MCsoftContext context, INotyfService notyf)
         {
             _context = context;
+            _notyf = notyf;
         }
 
         public List<SelectListItem> Options { get; set; }
@@ -48,7 +51,7 @@ namespace TutorBuddy_MCsoft.Pages
             Resource.Module = module;
             _context.Resources.Add(Resource);
             await _context.SaveChangesAsync();
-
+            _notyf.Success("Files Uploaded");
             return RedirectToPage("./Index");
         }
     }

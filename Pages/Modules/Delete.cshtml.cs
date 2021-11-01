@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -13,10 +14,12 @@ namespace TutorBuddy.Pages.Modules
     public class DeleteModel : PageModel
     {
         private readonly TutorBuddy_MCsoftContext _context;
+        private readonly INotyfService _notyf;
 
-        public DeleteModel(TutorBuddy_MCsoftContext context)
+        public DeleteModel(TutorBuddy_MCsoftContext context, INotyfService notyf)
         {
             _context = context;
+            _notyf = notyf;
         }
 
         [BindProperty]
@@ -52,6 +55,7 @@ namespace TutorBuddy.Pages.Modules
                 _context.Modules.Remove(Module);
                 await _context.SaveChangesAsync();
             }
+            _notyf.Success("Module Deletd");
 
             return RedirectToPage("./Index");
         }

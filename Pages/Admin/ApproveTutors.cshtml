@@ -47,7 +47,7 @@
                 @Html.DisplayFor(modelItem => item.AvgRating)
             </td>
             <td>
-                <a asp-page="./Details" asp-route-id="@item.StudentNumber">Details</a> |
+                <a asp-page="/Tutors/Details" asp-route-id="@item.StudentNumber">Details</a> |
                 <a asp-page="./Delete" asp-route-id="@item.StudentNumber">Delete</a>
             </td>
         </tr>

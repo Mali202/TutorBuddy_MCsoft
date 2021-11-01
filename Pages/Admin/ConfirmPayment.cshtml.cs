@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -14,11 +15,13 @@ namespace TutorBuddy_MCsoft.Pages
     {
         private readonly TutorBuddy_MCsoft.Data.TutorBuddy_MCsoftContext _context;
         private readonly Use_Cases use_;
+        private readonly INotyfService _notyf;
 
-        public ConfirmPaymentModel(TutorBuddy_MCsoft.Data.TutorBuddy_MCsoftContext context)
+        public ConfirmPaymentModel(TutorBuddy_MCsoft.Data.TutorBuddy_MCsoftContext context, INotyfService notyf)
         {
             _context = context;
             use_ = new Use_Cases(_context);
+            _notyf = notyf;
         }
 
         public IndividualBooking IndividualBooking { get; set; }
@@ -45,6 +48,7 @@ namespace TutorBuddy_MCsoft.Pages
         {
             IndividualBooking = await _context.IndividualBookings.FirstOrDefaultAsync(m => m.BookingID == id);
             use_.makePaymentIndividual(IndividualBooking);
+            _notyf.Success("Payment Confirmed");
             return RedirectToPage("./UnpaidBookings");
         }
     }

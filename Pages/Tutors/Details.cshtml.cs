@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -15,11 +16,13 @@ namespace TutorBuddy.Pages.Tutors
     {
         private readonly TutorBuddy_MCsoftContext _context;
         private readonly Use_Cases use_;
+        private readonly INotyfService _notyf;
 
-        public DetailsModel(TutorBuddy_MCsoftContext context)
+        public DetailsModel(TutorBuddy_MCsoftContext context, INotyfService notyf)
         {
             _context = context;
             use_ = new Use_Cases(_context);
+            _notyf = notyf;
         }
 
         public Tutor Tutor { get; set; }
@@ -44,7 +47,8 @@ namespace TutorBuddy.Pages.Tutors
         {
             Tutor = await _context.Tutors.FirstOrDefaultAsync(m => m.StudentNumber == id);
             use_.approveTutor(Tutor);
-            return RedirectToPage("./ApproveTutors");
+            _notyf.Success("Tutor Approved");
+            return RedirectToPage("/Admin/ApproveTutors");
         }
     }
 }

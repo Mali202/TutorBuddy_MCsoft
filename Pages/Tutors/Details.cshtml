@@ -20,7 +20,7 @@
             Email Address
         </dt>
         <dd class="col-sm-10">
-            JohnDoe@gmail.com
+            @Html.DisplayNameFor(model => Model.Tutor.EmailAddress)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Tutor.Fee)
@@ -35,8 +35,8 @@
 </div>
 <div class="btn-group" role="group">
     <form method="post">
-        <button type="submit" class="btn btn-secondary">Approve</button>
-        <button class="btn btn-secondary">Reject</button>
+        <button type="submit" class="btn btn-primary">Approve</button>
+        <button class="btn btn-primary">Reject</button>
     </form>
      
 </div>

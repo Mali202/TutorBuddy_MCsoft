@@ -43,11 +43,17 @@ namespace TutorBuddy.Pages.Tutors
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAccept(int? id)
         {
             Tutor = await _context.Tutors.FirstOrDefaultAsync(m => m.StudentNumber == id);
             use_.approveTutor(Tutor);
             _notyf.Success("Tutor Approved");
+            return RedirectToPage("/Admin/ApproveTutors");
+        }
+
+        public async Task<IActionResult> OnPostReject()
+        {
+            _notyf.Error("Tutor Rejected");
             return RedirectToPage("/Admin/ApproveTutors");
         }
     }

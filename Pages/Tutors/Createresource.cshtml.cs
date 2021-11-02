@@ -52,7 +52,7 @@ namespace TutorBuddy_MCsoft.Pages
             _context.Resources.Add(Resource);
             await _context.SaveChangesAsync();
             _notyf.Success("Files Uploaded");
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Index");
         }
     }
 }

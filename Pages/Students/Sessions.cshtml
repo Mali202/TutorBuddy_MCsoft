@@ -49,7 +49,7 @@
                 @Html.DisplayFor(modelitem => item.ModuleTutor.Tutor.UserName)
             </td>
             <td>
-                <a asp-page="./RateTutor" asp-route-ss="@Model.studentNum" asp-route-ts="@item.ModuleTutor.StudentNumber">Rate Tutor</a>
+                <a asp-page="/Students/RateTutor" asp-route-ss="@Model.studentNum" asp-route-ts="@item.ModuleTutor.StudentNumber">Rate Tutor</a>
             </td>
         </tr>
 }

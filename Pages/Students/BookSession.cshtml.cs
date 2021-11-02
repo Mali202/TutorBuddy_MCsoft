@@ -84,7 +84,7 @@ namespace TutorBuddy.Pages.Sessions
             IndividualBooking booking = new() { Paid = false, Session = Session, Student = student };
             use_.bookSessionIndividual(booking);
             _notyf.Success("Session Booked");
-            return RedirectToPage("./Payment", new { id = booking.Session.SessionID });
+            return RedirectToPage("/Students/Payment", new { id = booking.Session.SessionID });
         }
     }
 }

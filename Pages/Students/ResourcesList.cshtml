@@ -28,11 +28,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Type)
             </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.Link)
-            </td>*@
             <td>
-                <a asp-page="./Download" asp-route-id="@item.ID">Download</a>
+                <a asp-page="/Students/Download" asp-route-id="@item.ID">Download</a>
             </td>
         </tr>
 }

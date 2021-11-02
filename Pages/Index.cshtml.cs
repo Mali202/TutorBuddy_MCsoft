@@ -27,14 +27,17 @@ namespace TutorBuddy_MCsoft.Pages
         }
 
         public string role { get; set; }
+        public int sNum { get; set; }
 
         public async Task OnGetAsync()
         {
             await _emailSender.SendEmailAsync("chloe.welgemoed1999@gmail.com","Confirm", $"Please confirm your account by <a href=''>clicking here</a>.");
             TutorBuddy_MCsoftUser user = await _UserManager.GetUserAsync(User);
+            
             role = "student";
             if (_SignInManager.IsSignedIn(User))
             {
+                sNum = user.StudentNumber;
                 role = user.Role; 
             }
         }

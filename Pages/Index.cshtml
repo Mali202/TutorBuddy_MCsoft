@@ -13,7 +13,7 @@
             <a asp-area="" asp-page="./Tutors/Index"><button class="btn-primary">Tutors</button></a>
             <a asp-area="" asp-page="./Modules/Index"><button class="btn-primary">Available Modules</button></a>
             <a asp-area="Identity" asp-page="/Account/Manage/Index"><button class="btn-primary">Profile</button></a>
-            @*<a asp-area="" asp-page="ResourcesList"><button class="btn-primary">Download notes</button></a>*@
+            
         </div>
     }
     @if (Model.role == "admin")
@@ -25,5 +25,13 @@
             <a asp-page="/Admin/UnpaidBookings"><button class="btn-primary">Confirm Payments</button></a>
         </div>
     }
+    @if (Model.role == "tutor")
+            {
+<div class="btn-group-lg">
+    <a asp-area="" asp-page="./Modules/Index"><button class="btn-primary">Available Modules</button></a>
+    <a asp-page="/PendingBookings" asp-route-id="@Model.sNum"><button class="btn-primary">Bookings</button></a>
+    <a asp-page="/CreateResource"><button class="btn-primary">Upload Notes</button></a>
+</div>
+            }
 
 </div>

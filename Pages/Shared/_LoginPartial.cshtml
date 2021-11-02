@@ -11,21 +11,6 @@
         <li class="nav-item">
             <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @Use_Cases.greeting(context, UserManager.GetUserAsync(User).Result)!</a>
         </li>
-        @*@if (UserManager.GetUserAsync(User).Result.Role == "admin")
-        {
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-page="/Admin/ApproveTutors">Manage Tutors</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-page="/Admin/ViewStudents">Students</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-page="/Modules/Maintain">Maintain Modules</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-page="/Admin/UnpaidBookings">Confirm Payments</a>
-            </li>
-        }*@
         @if (UserManager.GetUserAsync(User).Result.Role == "student")
         {
             <li class="nav-item">

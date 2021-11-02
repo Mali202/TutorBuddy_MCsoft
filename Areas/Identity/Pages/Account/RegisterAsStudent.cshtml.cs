@@ -103,6 +103,10 @@ namespace TutorBuddy_MCsoft.Areas.Identity.Pages.Account
 
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            if (_context.Student.Any(s => s.StudentNumber==Input.studentNumber))
+            {
+                ModelState.AddModelError("", "Student number already exists");
+            }
             if (ModelState.IsValid)
             {
                 var user = new TutorBuddy_MCsoftUser { UserName = Input.Email, Email = Input.Email, StudentNumber = Input.studentNumber, Role = "student"};

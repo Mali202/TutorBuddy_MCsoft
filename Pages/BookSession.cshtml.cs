@@ -60,7 +60,14 @@ namespace TutorBuddy.Pages.Sessions
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync(int? ts, int? ss)
         {
-            if(Session.StartTime > Session.EndTime)
+            IList<ModulesTutored> modules = _context.ModulesTutored.Include(t => t.Tutor).Include(m => m.Module).Where(mt => mt.StudentNumber == ts).ToList();
+            Options = modules.Select(mt =>
+                                                new SelectListItem
+                                                {
+                                                    Value = mt.Module.ModuleID.ToString(),
+                                                    Text = mt.Module.ModuleName
+                                                }).ToList();
+            if (Session.StartTime > Session.EndTime)
             {
                 ModelState.AddModelError(string.Empty, "Start time cannot be after end time");
             }

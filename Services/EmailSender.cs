@@ -1,4 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity.UI.Services;
+﻿using MailKit.Net.Smtp;
+using MailKit.Security;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+using MimeKit;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using System;
@@ -10,33 +16,64 @@ namespace TutorBuddy_MCsoft.Services
 {
     public class EmailSender : IEmailSender
     {
-        public EmailSender()
+        private readonly MailSettings _emailSettings;
+        private readonly IWebHostEnvironment _env;
+
+        public EmailSender(
+            IOptions<MailSettings> emailSettings,
+            IWebHostEnvironment env)
         {
-            
+            _emailSettings = emailSettings.Value;
+            _env = env;
         }
 
-        public Task SendEmailAsync(string email, string subject, string message)
+        public async Task SendEmailAsync(string email, string subject, string message)
         {
-            return Execute("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", subject, message, email);
-        }
-
-        public Task Execute(string apiKey, string subject, string message, string email)
-        {
-            var client = new SendGridClient(apiKey);
-            var msg = new SendGridMessage()
+            try
             {
-                From = new EmailAddress("tutorbuddy@protonmail.com", "Admin"),
-                Subject = subject,
-                PlainTextContent = message,
-                HtmlContent = message
-            };
-            msg.AddTo(new EmailAddress(email));
+                var mimeMessage = new MimeMessage();
 
-            // Disable click tracking.
-            // See https://sendgrid.com/docs/User_Guide/Settings/tracking.html
-            msg.SetClickTracking(false, false);
+                mimeMessage.From.Add(new MailboxAddress(_emailSettings.SenderName, _emailSettings.Sender));
 
-            return client.SendEmailAsync(msg);
+                mimeMessage.To.Add(new MailboxAddress(email));
+
+                mimeMessage.Subject = subject;
+
+                mimeMessage.Body = new TextPart("html")
+                {
+                    Text = message
+                };
+
+                using (var client = new SmtpClient())
+                {
+                    // For demo-purposes, accept all SSL certificates (in case the server supports STARTTLS)
+                    client.ServerCertificateValidationCallback = (s, c, h, e) => true;
+
+                    if (_env.IsDevelopment())
+                    {
+                        // The third parameter is useSSL (true if the client should make an SSL-wrapped
+                        // connection to the server; otherwise, false).
+                        await client.ConnectAsync(_emailSettings.MailServer, _emailSettings.MailPort, SecureSocketOptions.StartTls);
+                    }
+                    else
+                    {
+                        await client.ConnectAsync(_emailSettings.MailServer);
+                    }
+
+                    // Note: only needed if the SMTP server requires authentication
+                    await client.AuthenticateAsync(_emailSettings.Sender, _emailSettings.Password);
+
+                    await client.SendAsync(mimeMessage);
+
+                    await client.DisconnectAsync(true);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                // TODO: handle exception
+                throw new InvalidOperationException(ex.Message);
+            }
         }
     }
 }

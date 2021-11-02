@@ -31,7 +31,7 @@ namespace TutorBuddy_MCsoft.Pages
 
         public async Task OnGetAsync()
         {
-            //await _emailSender.SendEmailAsync("chloe.welgemoed1999@gmail.com","Confirm", $"Please confirm your account by <a href=''>clicking here</a>.");
+            //await _emailSender.SendEmailAsync("malibongwematiso@gmail.com","Confirm", $"Please confirm your account by <a href=''>clicking here</a>.");
             TutorBuddy_MCsoftUser user = await _UserManager.GetUserAsync(User);
             
             role = "student";

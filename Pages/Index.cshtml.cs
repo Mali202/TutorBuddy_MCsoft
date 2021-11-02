@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
@@ -15,18 +16,21 @@ namespace TutorBuddy_MCsoft.Pages
         private readonly ILogger<IndexModel> _logger;
         private readonly UserManager<TutorBuddy_MCsoftUser> _UserManager;
         private readonly SignInManager<TutorBuddy_MCsoftUser> _SignInManager;
+        private readonly IEmailSender _emailSender;
 
-        public IndexModel(ILogger<IndexModel> logger, UserManager<TutorBuddy_MCsoftUser> UserManager, SignInManager<TutorBuddy_MCsoftUser> SignInManager)
+        public IndexModel(IEmailSender emailSender, ILogger<IndexModel> logger, UserManager<TutorBuddy_MCsoftUser> UserManager, SignInManager<TutorBuddy_MCsoftUser> SignInManager)
         {
             _logger = logger;
             _UserManager = UserManager;
             _SignInManager = SignInManager;
+            _emailSender = emailSender;
         }
 
         public bool isTutor { get; set; }
 
         public async Task OnGetAsync()
         {
+            await _emailSender.SendEmailAsync("chloe.welgemoed1999@gmail.com","Confirm", $"Please confirm your account by <a href=''>clicking here</a>.");
             TutorBuddy_MCsoftUser user = await _UserManager.GetUserAsync(User);
             isTutor = false;
             if (_SignInManager.IsSignedIn(User))

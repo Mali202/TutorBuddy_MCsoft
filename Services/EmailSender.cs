@@ -17,7 +17,7 @@ namespace TutorBuddy_MCsoft.Services
 
         public Task SendEmailAsync(string email, string subject, string message)
         {
-            return Execute("", subject, message, email);
+            return Execute("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", subject, message, email);
         }
 
         public Task Execute(string apiKey, string subject, string message, string email)
@@ -25,7 +25,7 @@ namespace TutorBuddy_MCsoft.Services
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
             {
-                From = new EmailAddress("Joe@contoso.com", "Password Recovery"),
+                From = new EmailAddress("tutorbuddy@protonmail.com", "Admin"),
                 Subject = subject,
                 PlainTextContent = message,
                 HtmlContent = message

@@ -49,7 +49,7 @@
                 @Html.DisplayFor(modelitem => item.Session.ModuleTutor.Module.ModuleName)
             </td>
             <td>
-                <a asp-page="./ConfirmBooking" asp-route-id="@item.Session.SessionID">Details</a>
+                <a asp-page="/Tutors/ConfirmBooking" asp-route-id="@item.Session.SessionID">Details</a>
             </td>
         </tr>
 }

@@ -21,7 +21,7 @@
         <div class="btn-group-lg">
             <a asp-page="/Admin/ApproveTutors"><button class="btn-primary">Manage Tutors</button></a>
             <a asp-page="/Admin/ViewStudents"><button class="btn-primary">Students</button></a>
-            <a asp-page="/Modules/Maintain"><button class="btn-primary">Maintain Modules</button></a>
+            <a asp-page="/Admin/Maintain"><button class="btn-primary">Maintain Modules</button></a>
             <a asp-page="/Admin/UnpaidBookings"><button class="btn-primary">Confirm Payments</button></a>
         </div>
     }
@@ -29,8 +29,8 @@
             {
 <div class="btn-group-lg">
     <a asp-area="" asp-page="./Modules/Index"><button class="btn-primary">Available Modules</button></a>
-    <a asp-page="/PendingBookings" asp-route-id="@Model.sNum"><button class="btn-primary">Bookings</button></a>
-    <a asp-page="/CreateResource"><button class="btn-primary">Upload Notes</button></a>
+    <a asp-page="/Tutors/PendingBookings" asp-route-id="@Model.sNum"><button class="btn-primary">Bookings</button></a>
+    <a asp-page="/Tutors/CreateResource"><button class="btn-primary">Upload Notes</button></a>
 </div>
             }
 

@@ -26,16 +26,16 @@ namespace TutorBuddy_MCsoft.Pages
             _emailSender = emailSender;
         }
 
-        public bool isTutor { get; set; }
+        public string role { get; set; }
 
         public async Task OnGetAsync()
         {
             await _emailSender.SendEmailAsync("chloe.welgemoed1999@gmail.com","Confirm", $"Please confirm your account by <a href=''>clicking here</a>.");
             TutorBuddy_MCsoftUser user = await _UserManager.GetUserAsync(User);
-            isTutor = false;
+            role = "student";
             if (_SignInManager.IsSignedIn(User))
             {
-                isTutor = user.Role == "tutor"; 
+                role = user.Role; 
             }
         }
     }

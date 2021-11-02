@@ -51,7 +51,13 @@
                 }
             </td>
             <td>
-              <a asp-page="../BookSession" asp-route-ts="@item.StudentNumber" asp-route-ss="@Model._user.StudentNumber">Book Session</a>
+                @{  if (Model._user.Role == "student")
+                    {
+                                <a asp-page="../BookSession" asp-route-ts="@item.StudentNumber" asp-route-ss="@Model._user.StudentNumber">Book Session</a>
+                    }
+                                
+                 }
+              
             </td>
         </tr> 
 	}

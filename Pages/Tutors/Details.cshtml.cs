@@ -51,7 +51,7 @@ namespace TutorBuddy.Pages.Tutors
             return RedirectToPage("/Admin/ApproveTutors");
         }
 
-        public async Task<IActionResult> OnPostReject()
+        public async Task<IActionResult> OnPostReject(int? id)
         {
             _notyf.Error("Tutor Rejected");
             return RedirectToPage("/Admin/ApproveTutors");

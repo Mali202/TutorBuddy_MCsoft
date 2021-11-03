@@ -43,21 +43,9 @@ namespace TutorBuddy_MCsoft
             _context.SaveChanges();
         }
 
-        public void bookSessionGroup(GroupBooking booking)
-        {
-            _context.GroupBookings.Add(booking);
-            _context.SaveChanges();
-        }
-
         public void makePaymentIndividual(IndividualBooking individualBooking)
         {
             individualBooking.Paid = true;
-            _context.SaveChanges();
-        }
-
-        public void makePaymentGroup(GroupBooking groupBooking)
-        {
-            groupBooking.Paid = true;
             _context.SaveChanges();
         }
 

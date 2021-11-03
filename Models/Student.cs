@@ -14,6 +14,5 @@ namespace TutorBuddy_MCsoft.Models
         public string EmailAddress { get; set; }
         public string LevelOfStudy { get; set; }
 
-        public IList<StudentGroupBooking> Bookings { get; set; }
     }
 }

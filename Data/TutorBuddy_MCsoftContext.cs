@@ -21,12 +21,6 @@ namespace TutorBuddy_MCsoft.Data
                 .HasOne<Module>(sc => sc.Module)
                 .WithMany(s => s.ModulesTutored)
                 .HasForeignKey(s => s.ModuleID);
-
-            modelBuilder.Entity<StudentGroupBooking>().HasKey(sc => new { sc.StudentNumber, sc.BookingID });
-            modelBuilder.Entity<StudentGroupBooking>()
-                .HasOne<GroupBooking>(sc => sc.Booking)
-                .WithMany(s => s.Students)
-                .HasForeignKey(s => s.BookingID);
         }
 
         public DbSet<Student> Student { get; set; }
@@ -37,7 +31,6 @@ namespace TutorBuddy_MCsoft.Data
         public DbSet<Session> Sessions { get; set; }
         public DbSet<ModulesTutored> ModulesTutored { get; set; }
         public DbSet<IndividualBooking> IndividualBookings { get; set; }
-        public DbSet<GroupBooking> GroupBookings { get; set; }
-        public DbSet<TutorBuddy_MCsoft.Models.BankDetails> BankDetails { get; set; }
+        public DbSet<BankDetails> BankDetails { get; set; }
     }
 }

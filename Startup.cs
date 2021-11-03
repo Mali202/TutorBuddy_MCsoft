@@ -14,7 +14,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using TutorBuddy_MCsoft.Areas.Identity.Data;
 using TutorBuddy_MCsoft.Data;
-using TutorBuddy_MCsoft.Services;
 
 namespace TutorBuddy_MCsoft
 {

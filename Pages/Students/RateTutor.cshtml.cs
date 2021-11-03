@@ -45,7 +45,7 @@ namespace TutorBuddy_MCsoft.Pages
             Review review = new() { Rating = rating, Comment = comment, Student = student, Tutor = tutor };
             use_.addReview(review);
             _notyf.Success("Tutor Rated");
-            return RedirectToPage("/Students/Sessions");
+            return RedirectToPage("/Students/Sessions", new { ss });
         }
     }
 }

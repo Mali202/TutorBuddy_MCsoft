@@ -36,7 +36,7 @@
 <div class="btn-group" role="group">
     <form method="post">
         <button asp-page-handler="Accept" asp-route-id="@Model.Tutor.StudentNumber" class="btn btn-primary">Approve</button>
-        <button asp-page-handler="Reject" class="btn btn-primary">Reject</button>
+        <button asp-page-handler="Reject" asp-route-id="@Model.Tutor.StudentNumber" class="btn btn-primary">Reject</button>
     </form>
      
 </div>

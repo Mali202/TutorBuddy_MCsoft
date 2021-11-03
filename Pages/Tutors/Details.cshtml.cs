@@ -53,6 +53,9 @@ namespace TutorBuddy.Pages.Tutors
 
         public async Task<IActionResult> OnPostReject(int? id)
         {
+            Tutor = await _context.Tutors.FirstOrDefaultAsync(m => m.StudentNumber == id);
+            _context.Tutors.Remove(Tutor);
+            await _context.SaveChangesAsync();
             _notyf.Error("Tutor Rejected");
             return RedirectToPage("/Admin/ApproveTutors");
         }
